@@ -3,6 +3,11 @@ import os
 import pyfiglet
 import colorama
 from colorama import Fore, Style, Back
+import time
+import shutil
+
+# socks_config = input("Path for the socks config file output? \n ")
+# http_config = input("Path for the http config file output? \n ")
 
 # Initialize colorama
 colorama.init()
@@ -24,6 +29,12 @@ moveOver = ''' _____________
                 ||     ||
 '''
 print(Fore.BLUE + Back.BLACK , moveOver + "\n This script will curl a fresh proxies, and then format them for the proxychains.conf file. After running it you will have two files configured for proxychains with hundreds and hundreds of free proxies automatically added to the config file. ")
+
+if os.path.isfile("/Users/frisby/.proxySocks4.conf"):
+    os.remove("/Users/frisby/.proxySocks4.conf")
+if os.path.isfile("/Users/frisby/.proxyHttp.conf"):
+    os.remove("/Users/frisby/.proxyHttp.conf")
+
 
 # Set the URL for the socks4 list, HTTP, and a fresh proxychains.conf file.
 socks4_url = "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt"
@@ -147,6 +158,11 @@ try:
 except FileNotFoundError:
     pass
 
+time.sleep(5)
+# shutil.move("proxyHttp.conf", "$HOME/.proxyHttp.conf")
+# shutil.move("proxySocks4.conf", "$HOME/.proxySocks4.conf")
+subprocess.run(['mv', 'proxySocks4.conf', '/Users/frisby/.proxySocks4.conf'])
+subprocess.run(['mv', 'proxyHttp.conf', '/Users/frisby/.proxyHttp.conf'])
 
 text = pyfiglet.figlet_format("Done...2 config files. \n in output \n  Use with \n  proxychains with  \n   -f flag.", 
 font="small")
