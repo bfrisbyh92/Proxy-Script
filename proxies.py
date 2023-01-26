@@ -4,7 +4,6 @@ import pyfiglet
 import colorama
 from colorama import Fore, Style, Back
 import time
-import shutil
 
 # socks_config = input("Path for the socks config file output? \n ")
 # http_config = input("Path for the http config file output? \n ")
@@ -158,9 +157,8 @@ try:
 except FileNotFoundError:
     pass
 
+# Sleep timer to make sure it's finished running before it moves them
 time.sleep(5)
-# shutil.move("proxyHttp.conf", "$HOME/.proxyHttp.conf")
-# shutil.move("proxySocks4.conf", "$HOME/.proxySocks4.conf")
 subprocess.run(['mv', 'proxySocks4.conf', '/Users/frisby/.proxySocks4.conf'])
 subprocess.run(['mv', 'proxyHttp.conf', '/Users/frisby/.proxyHttp.conf'])
 
